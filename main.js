@@ -49,3 +49,88 @@ $("subjectDialog").addEventListener("click",e=>{if(e.target===$("subjectDialog")
 document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{
   const target=document.querySelector(a.getAttribute("href"));if(target){e.preventDefault();target.scrollIntoView({behavior:"smooth"});history.replaceState(null,"",a.getAttribute("href"));}
 }));
+
+/* LearnNest Firebase Google sign-in */
+(() => {
+  const authMessage = document.getElementById("authMessage");
+  const signInButton = document.getElementById("googleSignIn");
+  const signOutButton = document.getElementById("googleSignOut");
+  const accountDetails = document.getElementById("accountDetails");
+  const userName = document.getElementById("userName");
+  const userEmail = document.getElementById("userEmail");
+
+  // Stop safely if the sign-in section is not present.
+  if (!authMessage || !signInButton || !signOutButton ||
+      !accountDetails || !userName || !userEmail) return;
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB4zWWaOsVbLlSUXCNTh5AhY5uPBExkNKc",
+    authDomain: "learnnest-e4ee7.firebaseapp.com",
+    databaseURL: "https://learnnest-e4ee7-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "learnnest-e4ee7",
+    storageBucket: "learnnest-e4ee7.firebasestorage.app",
+    messagingSenderId: "218273655957",
+    appId: "1:218273655957:web:c6bb5094f9dd288c1bbf9c",
+    measurementId: "G-P4VS8LJ3Y6"
+  };
+
+  if (!window.firebase) {
+    authMessage.textContent =
+      "Sign-in tools could not load. Refresh the page and try again.";
+    return;
+  }
+
+  try {
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+
+    const auth = firebase.auth();
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    signInButton.addEventListener("click", async () => {
+      authMessage.textContent = "Opening Google sign-in…";
+      signInButton.disabled = true;
+
+      try {
+        await auth.signInWithPopup(provider);
+      } catch (error) {
+        console.error("LearnNest sign-in error:", error);
+        authMessage.textContent =
+          error.code === "auth/popup-closed-by-user"
+            ? "Sign-in was cancelled. You can try again."
+            : "Sign-in failed. Check your connection and Firebase settings, then try again.";
+      } finally {
+        signInButton.disabled = false;
+      }
+    });
+
+    signOutButton.addEventListener("click", async () => {
+      try {
+        await auth.signOut();
+        authMessage.textContent = "You have signed out.";
+      } catch (error) {
+        console.error("LearnNest sign-out error:", error);
+        authMessage.textContent = "Sign-out failed. Please try again.";
+      }
+    });
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        userName.textContent = user.displayName || "Learner";
+        userEmail.textContent = user.email || "";
+        accountDetails.hidden = false;
+        signInButton.hidden = true;
+        authMessage.textContent = "Welcome to LearnNest!";
+      } else {
+        accountDetails.hidden = true;
+        signInButton.hidden = false;
+        authMessage.textContent = "Sign in with Google to get started.";
+      }
+    });
+  } catch (error) {
+    console.error("LearnNest Firebase setup error:", error);
+    authMessage.textContent =
+      "Firebase could not start. Please check the configuration.";
+  }
+})();
