@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#6d4aff"><title>LearnNest — Learn every day</title>
+<link rel="stylesheet" href="styles.css"><script src="main.js" defer></script>
+</head>
+<body>
+<header class="header"><a class="brand" href="#home"><span class="logo">L</span> LearnNest</a><button id="menuToggle" class="menu" aria-expanded="false">☰</button><nav id="nav"><a href="#home">Home</a><a href="#subjects">Subjects</a><a href="#how">How it works</a><a class="navcta" href="#subjects">Start learning →</a></nav></header>
+<main>
+<section id="home" class="hero"><div><span class="eyebrow">✦ YOUR LEARNING JOURNEY STARTS HERE</span><h1>Make learning<br><em>feel possible.</em></h1><p class="lead">Explore subjects, build confidence, and take your next step with LearnNest — your friendly space to learn every day.</p><a class="btn" href="#subjects">Explore subjects →</a> <a class="btn light" href="#how">How it works</a><p class="tiny">✓ Learn at your own pace · Start with the basics</p></div><div class="art"><div class="bubble b1">✦ Keep growing</div><div class="books"><div class="book purple">LEARN</div><div class="book lavender">EXPLORE</div><div class="book cream">DISCOVER</div></div><div class="bubble b2">✧ One step at a time</div></div></section>
+<section class="stats"><div><b>8</b><span>Starter subjects</span></div><div><b>100%</b><span>Self-paced learning</span></div><div><b>1 step</b><span>To begin today</span></div></section>
+<section id="subjects" class="section"><div class="sectionhead"><div><span class="eyebrow">FIND YOUR NEXT STEP</span><h2>What would you like to learn?</h2><p>Choose a subject to explore. You can change your mind any time.</p></div><input id="subjectSearch" type="search" placeholder="Search subjects…" aria-label="Search subjects"></div>
+<div class="grid" id="subjectGrid">
+<article class="card" data-subject="Mathematics"><span class="ico lilac">➗</span><h3>Mathematics</h3><p>Build confidence with numbers, patterns, and problem-solving.</p><button data-open="Mathematics">Explore subject →</button></article>
+<article class="card" data-subject="English Language"><span class="ico peach">Aa</span><h3>English Language</h3><p>Strengthen reading, writing, grammar, and communication.</p><button data-open="English Language">Explore subject →</button></article>
+<article class="card" data-subject="Basic Science"><span class="ico mint">⚛</span><h3>Basic Science</h3><p>Discover the world through questions and experiments.</p><button data-open="Basic Science">Explore subject →</button></article>
+<article class="card" data-subject="Computer Studies"><span class="ico blue">⌘</span><h3>Computer Studies</h3><p>Learn digital skills and understand the technology around you.</p><button data-open="Computer Studies">Explore subject →</button></article>
+<article class="card" data-subject="Social Studies"><span class="ico peach">◎</span><h3>Social Studies</h3><p>Understand people, communities, and the world we share.</p><button data-open="Social Studies">Explore subject →</button></article>
+<article class="card" data-subject="Biology"><span class="ico mint">♧</span><h3>Biology</h3><p>Explore living things, ecosystems, and the human body.</p><button data-open="Biology">Explore subject →</button></article>
+<article class="card" data-subject="Physics"><span class="ico blue">◉</span><h3>Physics</h3><p>Explore forces, energy, motion, and how things work.</p><button data-open="Physics">Explore subject →</button></article>
+<article class="card" data-subject="Chemistry"><span class="ico lilac">⚗</span><h3>Chemistry</h3><p>Meet materials, elements, reactions, and everyday chemistry.</p><button data-open="Chemistry">Explore subject →</button></article>
+</div><p id="noResults" hidden>No subjects match that search. Try another word.</p></section>
+<section id="how" class="how"><div class="section centered"><span class="eyebrow">SIMPLE BY DESIGN</span><h2>Your learning, your pace.</h2><p>A few small steps can make a big difference.</p><div class="steps"><article><b>01</b><h3>Pick a subject</h3><p>Start with something you want to understand better.</p></article><article><b>02</b><h3>Explore a topic</h3><p>Break the subject into clear, manageable ideas.</p></article><article><b>03</b><h3>Keep going</h3><p>Return when you're ready and build on what you know.</p></article></div></div></section>
+<section class="section about"><span class="eyebrow">ABOUT LEARNNEST</span><h2>A little progress is still progress.</h2><p>LearnNest is designed to make learning feel welcoming and approachable. Start with one topic, ask questions, and keep growing at your own pace.</p><a class="btn" href="#subjects">Find a subject →</a></section>
+</main><footer><a class="brand" href="#home"><span class="logo">L</span> LearnNest</a><span>Keep curious. Keep learning.</span><span>© <span id="year"></span> LearnNest</span></footer>
+<dialog id="subjectDialog"><button id="closeDialog" class="close" aria-label="Close">×</button><span class="eyebrow">YOUR NEXT LEARNING STEP</span><h2 id="dialogTitle"></h2><p id="dialogDescription"></p><div id="topicList"></div><p class="muted">These are starter topics. More lessons can be added next.</p><button id="doneDialog" class="btn">Got it</button></dialog><div id="toast" role="status"></div>
+</body></html>
