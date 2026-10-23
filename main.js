@@ -1,5 +1,14 @@
 const subjects = {
-"Mathematics": ["Number sense and place value","Fractions, decimals, and percentages","Algebra basics","Shapes and measurement","Data and graphs"],
+  "Mathematics": [
+  "Number sense and place value",
+  "Fractions, decimals, and percentages",
+  "Algebra basics",
+  "Shapes and measurement",
+  "Data and graphs",
+  "Introduction to number patterns",
+  "Ratio and proportion",
+  "Perimeter and area"
+],
 "English Language": ["Parts of speech","Sentence building","Reading comprehension","Vocabulary development","Writing clearly"],
 "Basic Science": ["Living and non-living things","Matter and materials","Energy in everyday life","Our environment","Scientific observation"],
 "Computer Studies": ["Computer parts and functions","Using files and folders","Internet and online safety","Introduction to coding","Digital citizenship"],
