@@ -58,7 +58,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",
   const accountDetails = document.getElementById("accountDetails");
   const userName = document.getElementById("userName");
   const userEmail = document.getElementById("userEmail");
-
+ const learnerDashboard = document.getElementById("learnerDashboard");
+  const dashboardName = document.getElementById("dashboardName");
   // Stop safely if the sign-in section is not present.
   if (!authMessage || !signInButton || !signOutButton ||
       !accountDetails || !userName || !userEmail) return;
@@ -114,20 +115,35 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",
         authMessage.textContent = "Sign-out failed. Please try again.";
       }
     });
-
     auth.onAuthStateChanged(user => {
       if (user) {
         userName.textContent = user.displayName || "Learner";
         userEmail.textContent = user.email || "";
+
+        if (dashboardName) {
+          dashboardName.textContent = user.displayName || "Learner";
+        }
+
         accountDetails.hidden = false;
         signInButton.hidden = true;
+
+        if (learnerDashboard) {
+          learnerDashboard.hidden = false;
+        }
+
         authMessage.textContent = "Welcome to LearnNest!";
       } else {
         accountDetails.hidden = true;
         signInButton.hidden = false;
+
+        if (learnerDashboard) {
+          learnerDashboard.hidden = true;
+        }
+
         authMessage.textContent = "Sign in with Google to get started.";
       }
     });
+    
   } catch (error) {
     console.error("LearnNest Firebase setup error:", error);
     authMessage.textContent =
