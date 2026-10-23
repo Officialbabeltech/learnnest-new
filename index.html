@@ -48,6 +48,39 @@
       <p>You're signed in as:</p>
       <p id="userName"></p>
       <p id="userEmail"></p>
+      
+<div id="learnerDashboard">
+  <hr>
+  <span class="eyebrow">YOUR LEARNING SPACE</span>
+  <h2>Your dashboard</h2>
+  <p>Welcome back, <strong id="dashboardName">Learner</strong>!</p>
+  <p>Keep learning, one topic at a time.</p>
+
+  <div class="dashboard-stats">
+    <div class="card">
+      <h3 id="completedCount">0</h3>
+      <p>Topics completed</p>
+    </div>
+    <div class="card">
+      <h3 id="subjectCount">8</h3>
+      <p>Subjects to explore</p>
+    </div>
+  </div>
+
+  <h3>Explore your subjects</h3>
+  <p>Choose a subject to start learning.</p>
+
+  <div class="dashboard-subjects">
+    <button type="button" data-open="Mathematics">Mathematics</button>
+    <button type="button" data-open="English Language">English</button>
+    <button type="button" data-open="Basic Science">Basic Science</button>
+    <button type="button" data-open="Computer Studies">Computer Studies</button>
+    <button type="button" data-open="Social Studies">Social Studies</button>
+    <button type="button" data-open="Biology">Biology</button>
+    <button type="button" data-open="Physics">Physics</button>
+    <button type="button" data-open="Chemistry">Chemistry</button>
+  </div>
+</div>
       <button id="googleSignOut" type="button" class="secondary">
         Sign out
       </button>
