@@ -70,13 +70,69 @@ $("subjectSearch").addEventListener("input", e => {
   });
   $("noResults").hidden=count>0;
 });
+
 function openSubject(name) {
-  $("dialogTitle").textContent=name;
-  $("dialogDescription").textContent=descriptions[name];
+  $("dialogTitle").textContent = name;
+  $("dialogDescription").textContent = descriptions[name] || "";
   $("topicList").replaceChildren();
-  subjects[name].forEach(topic=>{const row=document.createElement("div");row.className="topic";row.textContent="✦  "+topic;$("topicList").append(row);});
-  if($("subjectDialog").showModal) $("subjectDialog").showModal();
+
+  $("lessonContent").hidden = true;
+  $("topicList").hidden = false;
+  $("topicNote").hidden = false;
+  $("doneDialog").hidden = false;
+
+  subjects[name].forEach(topic => {
+    const row = document.createElement("button");
+    row.type = "button";
+    row.className = "topic";
+    row.textContent = "✦  " + topic;
+    row.addEventListener("click", () => openLesson(topic));
+    $("topicList").append(row);
+  });
+
+  if ($("subjectDialog").showModal) {
+    $("subjectDialog").showModal();
+  }
 }
+
+function openLesson(topic) {
+  const lesson = lessons[topic];
+
+  if (!lesson) {
+    $("lessonTitle").textContent = topic;
+    $("lessonExplanation").textContent =
+      "This lesson is coming soon. Please explore another topic for now.";
+    $("lessonExample").textContent = "";
+    $("lessonQuestion").textContent = "";
+    $("lessonAnswer").textContent = "";
+    $("showAnswer").hidden = true;
+  } else {
+    $("lessonTitle").textContent = topic;
+    $("lessonExplanation").textContent = lesson.explanation;
+    $("lessonExample").textContent = lesson.example;
+    $("lessonQuestion").textContent = lesson.question;
+    $("lessonAnswer").textContent = "Answer: " + lesson.answer;
+    $("showAnswer").hidden = false;
+  }
+
+  $("lessonAnswer").hidden = true;
+  $("topicList").hidden = true;
+  $("topicNote").hidden = true;
+  $("lessonContent").hidden = false;
+  $("doneDialog").hidden = true;
+}
+
+$("showAnswer").addEventListener("click", () => {
+  $("lessonAnswer").hidden = false;
+});
+
+$("backToTopics").addEventListener("click", () => {
+  $("lessonContent").hidden = true;
+  $("topicList").hidden = false;
+  $("topicNote").hidden = false;
+  $("doneDialog").hidden = false;
+});
+
 document.querySelectorAll("[data-open]").forEach(button=>button.addEventListener("click",()=>openSubject(button.dataset.open)));
 $("closeDialog").addEventListener("click",()=>$("subjectDialog").close());
 $("doneDialog").addEventListener("click",()=>$("subjectDialog").close());
