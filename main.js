@@ -18,6 +18,41 @@ const descriptions = {
 "Physics":"Explore forces, energy, motion, and how things work.",
 "Chemistry":"Meet materials, elements, reactions, and everyday chemistry."
 };
+
+const lessons = {
+  "Number sense and place value": {
+    explanation: "A digit's place tells us its value in a number. Moving one place to the left makes its value ten times greater.",
+    example: "In 352, the 3 represents 300, the 5 represents 50, and the 2 represents 2.",
+    question: "What is the value of 4 in 4,281?",
+    answer: "4,000"
+  },
+  "Fractions, decimals, and percentages": {
+    explanation: "Fractions, decimals, and percentages are different ways of representing parts of a whole.",
+    example: "One half is 1/2, 0.5, or 50%.",
+    question: "What percentage is equal to 1/4?",
+    answer: "25%"
+  },
+  "Algebra basics": {
+    explanation: "Algebra uses letters to represent unknown numbers.",
+    example: "If x + 3 = 8, subtract 3 from both sides to get x = 5.",
+    question: "If x + 4 = 10, what is x?",
+    answer: "6"
+  },
+  "Shapes and measurement": {
+    explanation: "Shapes have properties such as sides, angles, length, and area.",
+    example: "The perimeter of a rectangle is the total distance around its four sides.",
+    question: "How many sides does a hexagon have?",
+    answer: "6"
+  },
+  "Data and graphs": {
+    explanation: "Data is information we collect. Tables and graphs help us organise and understand it.",
+    example: "A bar chart compares amounts using bars of different heights.",
+    question: "Which graph is useful for comparing amounts in different categories?",
+    answer: "A bar chart"
+  }
+};
+
+
 const $ = id => document.getElementById(id);
 $("year").textContent = new Date().getFullYear();
 $("menuToggle").addEventListener("click", () => {
