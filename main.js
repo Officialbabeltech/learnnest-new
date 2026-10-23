@@ -49,6 +49,11 @@ const lessons = {
     example: "A bar chart compares amounts using bars of different heights.",
     question: "Which graph is useful for comparing amounts in different categories?",
     answer: "A bar chart"
+  }  "Data and graphs": {
+    explanation: "Data is information we collect. Tables and graphs help us organise and understand it.",
+    example: "A bar chart compares amounts using bars of different heights.",
+    question: "Which graph is useful for comparing amounts in different categories?",
+    answer: "A bar chart"
   }
 };
 
