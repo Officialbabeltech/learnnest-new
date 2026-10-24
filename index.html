@@ -2,22 +2,166 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#6d4aff">
-<title>LearnNest — Learn every day</title><link rel="stylesheet" href="styles.css">
+<meta name="theme-color" content="#6d4aff"><title>LearnNest — Learn every day</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="main.js" defer></script>
+<script src="premium.js" defer></script>
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="#home"><span class="brand-mark">✦</span><span>LearnNest<small>Learn. Practise. Grow.</small></span></a>
-  <nav><a href="#subjects">Subjects</a><a href="#subscription">Subscription</a><a href="#live">Live lessons</a></nav>
-  <div class="auth"><span id="userLabel">Not signed in</span><button id="signInBtn" class="btn btn-light" type="button">Sign in with Google</button><button id="signOutBtn" class="btn btn-light hidden" type="button">Sign out</button></div>
-</header>
-<main id="home">
-<section class="hero"><div class="hero-copy"><p class="eyebrow">YOUR LEARNING SPACE</p><h1>Make learning<br><span>feel possible.</span></h1><p>Explore school subjects, study clear notes, practise questions and track your progress.</p><div class="hero-actions"><a class="btn btn-primary" href="#subjects">Explore subjects ↓</a><a class="btn btn-light" href="#subscription">Get all subjects</a></div><p class="tiny">A learner-friendly starting point. Teachers should review and expand sample lessons before classroom use.</p></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="book">✦<br><span>LEARN</span><br>✎</div><div class="float float-a">✓ Practice</div><div class="float float-b">✦ Progress</div></div></section>
-<section id="subjects" class="section"><div class="section-heading"><div><p class="eyebrow">CHOOSE YOUR PATH</p><h2>Explore subjects</h2><p>Select a subject to open its lesson and practice questions.</p></div><span class="pill">8 learning areas</span></div><div id="subjectGrid" class="subject-grid"></div></section>
-<section id="lessonArea" class="section lesson-area hidden"><button id="backSubjects" class="btn btn-light" type="button">← All subjects</button><div id="lessonContent"></div></section>
-<section id="subscription" class="section"><div class="section-heading"><div><p class="eyebrow">ONE PLAN · ALL SUBJECTS</p><h2>Learn more for less.</h2><p>One month of LearnNest access across all listed subjects.</p></div></div><div class="subscription-layout"><div class="panel"><h3>Included in your plan</h3><ul class="check-list"><li>All listed subject learning areas</li><li>Lesson notes and worked examples</li><li>Practice quizzes and progress tracking</li><li>Live lesson requests</li></ul><p class="notice">Send your transfer receipt through WhatsApp. Your access stays pending until an administrator verifies the payment.</p></div><div class="panel price-panel"><p class="muted">Monthly subscription</p><div class="price">₦2,500 <span>/ month</span></div><p>All subjects included</p><div class="bank-details"><p><span>Bank</span><strong id="bankName">Opay</strong></p><p><span>Account name</span><strong id="accountName">Babel Tech</strong></p><p><span>Account number</span><strong><span id="accountNumber">9163250794</span> <button id="copyAccount" class="copy-btn" type="button">Copy</button></strong></p></div><a id="whatsappPay" class="btn btn-green full" target="_blank" rel="noopener noreferrer" href="#">Pay / send receipt on WhatsApp ↗</a><p class="tiny">Include your name and the Google account email you use on LearnNest. Verify account details in your banking app before transferring.</p><p class="tiny">Questions? <a href="mailto:lordlugard10@gmail.com">lordlugard10@gmail.com</a></p></div></div><div class="panel status-panel"><div><h3>Your subscription status</h3><p id="subscriptionStatus" class="muted">Sign in with Google, send your receipt on WhatsApp, then check your status after the administrator reviews it.</p></div><button id="refreshSubscription" class="btn btn-light" type="button">Check status</button></div></section>
-<section id="live" class="section live-section"><div><p class="eyebrow">LEARN WITH A TEACHER</p><h2>Need a live lesson?</h2><p>Send a lesson request. The teacher will confirm availability and share a Google Meet invitation separately.</p><a id="liveRequest" class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="#">Request a live lesson ↗</a></div><div class="meet-icon">▣<span>Google Meet</span></div></section>
-</main>
-<footer><a class="brand" href="#home"><span class="brand-mark">✦</span><span>LearnNest<small>Learn. Practise. Grow.</small></span></a><p>© <span id="year"></span> LearnNest · Questions: <a href="mailto:lordlugard10@gmail.com">lordlugard10@gmail.com</a></p></footer>
-<div id="toast" role="status" aria-live="polite"></div><script type="module" src="js/main.js"></script>
-</body></html>
+<header class="header"><a class="brand" href="#home"><span class="logo">L</span> LearnNest</a><button id="menuToggle" class="menu" aria-expanded="false">☰</button><nav id="nav"><a href="#home">Home</a><a href="#subjects">Subjects</a><a href="#how">How it works</a><a href="#premiumClasses">Online classes</a><a class="navcta" href="#subjects">Start learning →</a></nav></header>
+<main>
+<section id="home" class="hero"><div><span class="eyebrow">✦ YOUR LEARNING JOURNEY STARTS HERE</span><h1>Make learning<br><em>feel possible.</em></h1><p class="lead">Explore subjects, build confidence, and take your next step with LearnNest — your friendly space to learn every day.</p><a class="btn" href="#subjects">Explore subjects →</a> <a class="btn light" href="#how">How it works</a><p class="tiny">✓ Learn at your own pace · Start with the basics</p></div><div class="art"><div class="bubble b1">✦ Keep growing</div><div class="books"><div class="book purple">LEARN</div><div class="book lavender">EXPLORE</div><div class="book cream">DISCOVER</div></div><div class="bubble b2">✧ One step at a time</div></div></section>
+<section class="stats"><div><b>8</b><span>Starter subjects</span></div><div><b>100%</b><span>Self-paced learning</span></div><div><b>1 step</b><span>To begin today</span></div></section>
+<section id="subjects" class="section"><div class="sectionhead"><div><span class="eyebrow">FIND YOUR NEXT STEP</span><h2>What would you like to learn?</h2><p>Choose a subject to explore. You can change your mind any time.</p></div><input id="subjectSearch" type="search" placeholder="Search subjects…" aria-label="Search subjects"></div>
+<div class="grid" id="subjectGrid">
+<article class="card" data-subject="Mathematics"><span class="ico lilac">➗</span><h3>Mathematics</h3><p>Build confidence with numbers, patterns, and problem-solving.</p><button data-open="Mathematics">Explore subject →</button></article>
+<article class="card" data-subject="English Language"><span class="ico peach">Aa</span><h3>English Language</h3><p>Strengthen reading, writing, grammar, and communication.</p><button data-open="English Language">Explore subject →</button></article>
+<article class="card" data-subject="Basic Science"><span class="ico mint">⚛</span><h3>Basic Science</h3><p>Discover the world through questions and experiments.</p><button data-open="Basic Science">Explore subject →</button></article>
+<article class="card" data-subject="Computer Studies"><span class="ico blue">⌘</span><h3>Computer Studies</h3><p>Learn digital skills and understand the technology around you.</p><button data-open="Computer Studies">Explore subject →</button></article>
+<article class="card" data-subject="Social Studies"><span class="ico peach">◎</span><h3>Social Studies</h3><p>Understand people, communities, and the world we share.</p><button data-open="Social Studies">Explore subject →</button></article>
+<article class="card" data-subject="Biology"><span class="ico mint">♧</span><h3>Biology</h3><p>Explore living things, ecosystems, and the human body.</p><button data-open="Biology">Explore subject →</button></article>
+<article class="card" data-subject="Physics"><span class="ico blue">◉</span><h3>Physics</h3><p>Explore forces, energy, motion, and how things work.</p><button data-open="Physics">Explore subject →</button></article>
+<article class="card" data-subject="Chemistry"><span class="ico lilac">⚗</span><h3>Chemistry</h3><p>Meet materials, elements, reactions, and everyday chemistry.</p><button data-open="Chemistry">Explore subject →</button></article>
+</div><p id="noResults" hidden>No subjects match that search. Try another word.</p></section>
+<section id="how" class="how"><div class="section centered"><span class="eyebrow">SIMPLE BY DESIGN</span><h2>Your learning, your pace.</h2><p>A few small steps can make a big difference.</p><div class="steps"><article><b>01</b><h3>Pick a subject</h3><p>Start with something you want to understand better.</p></article><article><b>02</b><h3>Explore a topic</h3><p>Break the subject into clear, manageable ideas.</p></article><article><b>03</b><h3>Keep going</h3><p>Return when you're ready and build on what you know.</p></article></div></div></section>
+
+<section id="premiumClasses" class="section premium-section">
+  <div class="sectionhead"><div><span class="eyebrow">LEARN TOGETHER, LIVE</span><h2>LearnNest online classes</h2><p>Live weekday lessons, guided practice, and a chance to ask questions.</p></div><div class="price-card"><strong>₦2,500</strong><span>per 30 days</span></div></div>
+  <div class="premium-grid">
+    <div class="premium-card">
+      <span class="eyebrow">WEEKLY TIMETABLE</span><h3>Monday–Friday · West Africa Time</h3>
+      <p>Two 50-minute sessions each afternoon, with a 10-minute break.</p>
+      <div class="table-wrap"><table class="schedule-table"><thead><tr><th>Day</th><th>Time</th><th>Class</th></tr></thead><tbody id="classSchedule"></tbody></table></div>
+      <p class="muted">Class times are 3:00–3:50 pm and 4:00–4:50 pm WAT.</p>
+    </div>
+    <div class="premium-card">
+      <span class="eyebrow">SUBSCRIPTION</span><h3>Join the live classes</h3>
+      <p>Sign in with Google, use the payment instructions supplied by the administrator, then submit your transaction reference.</p>
+      <p id="premiumAuthStatus" role="status">Sign in with Google above to continue.</p>
+      <p id="subscriptionStatus" role="status">Your subscription status will appear here.</p>
+      <form id="subscriptionRequestForm" hidden>
+        <label for="paymentReference">Transfer reference / transaction description</label>
+        <input id="paymentReference" required minlength="4" maxlength="100" placeholder="Enter your payment reference">
+        <button id="sendSubscriptionRequest" class="btn" type="submit">Submit payment for review</button>
+      </form>
+      <p id="requestStatus" role="status" class="muted"></p>
+      <div id="meetAccessPanel" hidden><p id="meetLinkStatus" role="status">Your class access is ready.</p><a id="joinMeetButton" class="btn" href="#" target="_blank" rel="noopener" hidden>Join Google Meet →</a></div>
+      <p class="muted">Access is enabled only after an administrator verifies payment. Each approval lasts 30 days.</p>
+    </div>
+  </div>
+  <div id="premiumAdminPanel" class="premium-card admin-card" hidden>
+    <span class="eyebrow">ADMINISTRATION</span><h3>Manage subscriptions</h3>
+    <div id="pendingRequests">Loading requests…</div>
+    <hr><h3>Private Google Meet link</h3>
+    <label for="meetLinkInput">Meet URL (administrator only)</label>
+    <input id="meetLinkInput" type="url" placeholder="https://meet.google.com/…">
+    <button id="saveMeetLink" class="btn" type="button">Save private class link</button>
+    <p id="adminStatus" role="status" class="muted"></p>
+  </div>
+</section>
+
+<section id="account" class="section">
+  <div class="sectionhead">
+    <div>
+      <span class="eyebrow">YOUR LEARNING SPACE</span>
+      <h2>Welcome to LearnNest</h2>
+      <p>Sign in with Google to get started with your learning account.</p>
+    </div>
+  </div>
+
+  <div class="card" style="max-width:560px;margin:0 auto">
+    <p id="authMessage" role="status" aria-live="polite">
+      Sign in to continue.
+    </p>
+
+    <button id="googleSignIn" type="button">
+      Continue with Google
+    </button>
+
+    <div id="accountDetails" hidden>
+      <p>You're signed in as:</p>
+      <p id="userName"></p>
+      <p id="userEmail"></p>
+      
+<div id="learnerDashboard">
+  <hr>
+  <span class="eyebrow">YOUR LEARNING SPACE</span>
+  <h2>Your dashboard</h2>
+  <p>Welcome back, <strong id="dashboardName">Learner</strong>!</p>
+  <p>Keep learning, one topic at a time.</p>
+
+  <div class="dashboard-stats">
+    <div class="card">
+      <h3 id="completedCount">0</h3>
+      <p>Topics completed</p>
+    </div>
+    <div class="card">
+      <h3 id="subjectCount">8</h3>
+      <p>Subjects to explore</p>
+    </div>
+  </div>
+
+  <h3>Explore your subjects</h3>
+  <p>Choose a subject to start learning.</p>
+
+  <div class="dashboard-subjects">
+    <button type="button" data-open="Mathematics">Mathematics</button>
+    <button type="button" data-open="English Language">English</button>
+    <button type="button" data-open="Basic Science">Basic Science</button>
+    <button type="button" data-open="Computer Studies">Computer Studies</button>
+    <button type="button" data-open="Social Studies">Social Studies</button>
+    <button type="button" data-open="Biology">Biology</button>
+    <button type="button" data-open="Physics">Physics</button>
+    <button type="button" data-open="Chemistry">Chemistry</button>
+  </div>
+</div>
+      <button id="googleSignOut" type="button" class="secondary">
+        Sign out
+      </button>
+    </div>
+    </div>
+</section>
+</main><footer><a class="brand" href="#home"><span class="logo">L</span> LearnNest</a><span>Keep curious. Keep learning.</span><span>© <span id="year"></span> LearnNest</span></footer>
+
+<dialog id="subjectDialog">
+  <button id="closeDialog" class="close" aria-label="Close">×</button>
+
+  <span class="eyebrow">YOUR NEXT LEARNING STEP</span>
+  <h2 id="dialogTitle"></h2>
+  <p id="dialogDescription"></p>
+
+  <div id="topicList"></div>
+
+  <div id="lessonContent" hidden>
+    <hr>
+    <h3 id="lessonTitle"></h3>
+    <h4>Learn</h4>
+    <p id="lessonExplanation"></p>
+
+    <h4>Example</h4>
+    <p id="lessonExample"></p>
+
+    <h4>Practice question</h4>
+    <p id="lessonQuestion"></p>
+
+    <button id="showAnswer" type="button">Show answer</button>
+    <p id="lessonAnswer" hidden></p>
+
+    <button id="backToTopics" type="button" class="secondary">
+      Back to topics
+    </button>
+  </div>
+
+  <p class="muted" id="topicNote">
+    Choose a topic to start learning.
+  </p>
+
+  <button id="doneDialog" class="btn" type="button">Got it</button>
+</dialog>
+
+<div id="toast" role="status"></div>
+</body>
+</html>
